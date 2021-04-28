@@ -1,9 +1,11 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:poopmates/constants/Constantcolors.dart';
-import 'package:poopmates/screens/LandingPage/LandingPage.dart';
+import "package:flutter/material.dart";
+
+import "package:page_transition/page_transition.dart";
+
+import "package:poopmates/constants/Constantcolors.dart";
+import "package:poopmates/screens/LandingPage/LandingPage.dart";
 
 class SplashScreen extends StatefulWidget {
   @override

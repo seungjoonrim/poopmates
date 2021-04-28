@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:poopmates/constants/Constantcolors.dart';
-import 'package:poopmates/screens/LandingPage/landingHelpers.dart';
-import 'package:provider/provider.dart';
+import "package:flutter/material.dart";
+
+import "package:provider/provider.dart";
+
+import "package:poopmates/constants/Constantcolors.dart";
+import "package:poopmates/screens/LandingPage/landingHelpers.dart";
 
 class LandingPage extends StatelessWidget {
 
