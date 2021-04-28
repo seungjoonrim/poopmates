@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831709556972",
+    "project_id": "poopmates-6cb93",
+    "storage_bucket": "poopmates-6cb93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831709556972:android:f1796569e565c70aaff5c9",
+        "android_client_info": {
+          "package_name": "com.example.poopmates"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831709556972-bl27vtlmp56nufupf4ijssi9948mplnr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8SM3suk6V3FOiTuWAmM4tFtsMRyWu-Mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831709556972-bl27vtlmp56nufupf4ijssi9948mplnr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
