@@ -148,7 +148,9 @@ class LandingHelpers with ChangeNotifier {
                                 color: constantColors.whiteColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold)),
-                        onPressed: () {}),
+                        onPressed: () {
+                          Provider.of<LandingService>(context, listen: false).signInForm(context);
+                        }),
                     MaterialButton(
                         color: constantColors.redColor,
                         child: Text("Sign up",
@@ -156,7 +158,9 @@ class LandingHelpers with ChangeNotifier {
                                 color: constantColors.whiteColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold)),
-                        onPressed: () {})
+                        onPressed: () {
+                          Provider.of<LandingService>(context, listen: false).createAccountForm(context);
+                        })
                   ],
                 )
               ],
