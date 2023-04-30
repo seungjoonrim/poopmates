@@ -10,9 +10,11 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+
 import AuthContext from '../context/AuthContext';
 // import Button from '../components/Button';
 import { loginUser } from '../services/api';
+import globalStyles from '../styles/globalStyles';
 
 const LoginScreen = ({ navigation }) => {
   const { login } = useContext(AuthContext);
@@ -29,68 +31,32 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.header}>Login</Text>
       <TextInput
-        style={styles.input}
+        style={globalStyles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
-        style={styles.input}
+        style={globalStyles.input}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity style={globalStyles.button} onPress={handleLogin}>
+        <Text style={globalStyles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-        <Text style={styles.link}>Don't have an account? Register</Text>
+        <Text style={globalStyles.link}>Don't have an account? Register</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-        <Text style={styles.link}>Forgot password?</Text>
+        <Text style={globalStyles.link}>Forgot password?</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-// TODO: set base styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: 'black',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    padding: 10,
-    marginBottom: 10,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    borderRadius: 4,
-    padding: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  link: {
-    marginTop: 15,
-    textAlign: 'center',
-    color: '#007AFF',
-  },
-});
 
 export default LoginScreen;
