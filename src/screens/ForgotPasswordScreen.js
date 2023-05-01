@@ -15,6 +15,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [success, setSuccess] = useState(false);
 
+  // TODO
   const handleForgotPassword = async () => {
     try {
       await requestPasswordReset(email);

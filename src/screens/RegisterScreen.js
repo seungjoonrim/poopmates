@@ -7,8 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import AuthContext from '../context/AuthContext';
-import { registerUser } from '../services/api';
+import { AuthContext } from '../context/AuthContext';
 import globalStyles from '../styles/globalStyles';
 
 const RegisterScreen = ({ navigation }) => {
@@ -19,8 +18,7 @@ const RegisterScreen = ({ navigation }) => {
 
   async function handleRegister() {
     try {
-      const userData = await registerUser(username, email, password);
-      register(userData);
+      register(username, email, password, navigation);
     } catch (error) {
       // Handle error
     }

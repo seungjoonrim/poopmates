@@ -11,9 +11,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import AuthContext from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 // import Button from '../components/Button';
-import { loginUser } from '../services/api';
 import globalStyles from '../styles/globalStyles';
 
 const LoginScreen = ({ navigation }) => {
@@ -23,8 +22,7 @@ const LoginScreen = ({ navigation }) => {
 
   async function handleLogin() {
     try {
-      const userData = await loginUser(email, password);
-      login(userData);
+      login(email, password, navigation);
     } catch (error) {
       // Handle error
     }
