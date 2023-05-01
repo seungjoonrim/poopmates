@@ -27,18 +27,18 @@ const ProfileScreen = () => {
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.header}>Profile</Text>
-      <Text style={styles.info}>Username: {username}</Text>
-      <Text style={styles.info}>Email: {email}</Text>
+      <Text style={globalStyles.text}>Username: {username}</Text>
+      <Text style={globalStyles.text}>Email: {email}</Text>
       <TouchableOpacity onPress={() => navigation.navigate('SetStatus')}>
-        <Text style={styles.info}>
+        <Text style={globalStyles.text}>
           Pooping Status: {poopingStatus ? 'Pooping' : 'Not Pooping'}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Friends')}>
-        <Text style={styles.info}>Number of Friends: {numFriends}</Text>
+        <Text style={globalStyles.text}>Number of Friends: {numFriends}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}>Logout</Text>
+      <TouchableOpacity style={globalStyles.button} onPress={handleLogout}>
+        <Text style={globalStyles.buttonText}>Logout</Text>
       </TouchableOpacity>
     </View>
   );
@@ -48,17 +48,6 @@ const styles = StyleSheet.create({
   info: {
     fontSize: 18,
     marginBottom: 10,
-  },
-  logoutButton: {
-    backgroundColor: '#ff6347',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 20,
-  },
-  logoutText: {
-    fontSize: 18,
-    color: '#fff',
-    textAlign: 'center',
   },
 });
 
