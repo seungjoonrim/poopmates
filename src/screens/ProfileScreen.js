@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { AuthContext } from '../context/AuthContext';
 import globalStyles from '../styles/globalStyles';
 
 const ProfileScreen = () => {
+  const { logout } = useContext(AuthContext);
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -19,9 +25,12 @@ const ProfileScreen = () => {
     setNumFriends(5);
   }, []);
 
-  const handleLogout = () => {
-    // Implement logout logic here
-    navigation.navigate('Login');
+  async function handleLogout() {
+    try {
+      logout(navigation);
+    } catch (error) {
+
+    }
   };
 
   return (
