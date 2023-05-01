@@ -4,9 +4,14 @@ const api = axios.create({
   baseURL: 'http://192.168.1.169:3030/api',
 });
 
-export const loginUser = async (email, password) => {
+export const loginUser = async (email, password, jwt) => {
   try {
-    const response = await api.post('/login', { email, password });
+    const data = { email, password };
+    const headers = {
+      'Authorization': jwt,
+      'Content-Type': 'application/json',
+    }
+    const response = await api.post('/login', data, { headers });
 
     if (response.data) {
       return response.data;

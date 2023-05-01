@@ -1,5 +1,6 @@
 import React, {
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -16,7 +17,7 @@ import { AuthContext } from '../context/AuthContext';
 import globalStyles from '../styles/globalStyles';
 
 const LoginScreen = ({ navigation }) => {
-  const { login } = useContext(AuthContext);
+  const { checkToken, login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,6 +28,11 @@ const LoginScreen = ({ navigation }) => {
       // Handle error
     }
   };
+
+  useEffect(() => {
+    // Try logging in with JWT
+    handleLogin();
+  }, []);
 
   return (
     <View style={globalStyles.container}>

@@ -1,7 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
+  checkToken,
   loginUser,
   registerUser,
 } from '../services/api';
@@ -18,20 +22,33 @@ const AuthProvider = ({ children }) => {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
 
   async function login(email, password, nav) {
-    const userData = await loginUser(email, password);
-    setIsLoggedOut(true);
-    nav.navigate('TabNavigator');
+    try {
+      const token = await AsyncStorage.getItem('jwt');
+      const userData = await loginUser(email, password, token);
+      await AsyncStorage.setItem('user', JSON.stringify(userData));
+      await AsyncStorage.setItem('jwt', userData.token);
+      console.log("userData: " + JSON.stringify(userData));
+      setUser(userData.userData);
+      setIsLoggedOut(false);
+      nav.navigate('TabNavigator');
+    } catch (err) {}
   };
 
   async function register(username, email, password, nav) {
-    const userData = await registerUser(username, email, password);
-    nav.navigate('Login');
+    try {
+      const userData = await registerUser(username, email, password);
+      nav.navigate('Login');
+    } catch (err) {}
   };
 
   async function logout(nav) {
-    await AsyncStorage.removeItem("user");
-    setIsLoggedOut(true);
-    nav.navigate('Login');
+    try {
+      await AsyncStorage.removeItem('user');
+      await AsyncStorage.removeItem('jwt');
+      setUser(null);
+      setIsLoggedOut(true);
+      nav.navigate('Login');
+    } catch (e) {}
   };
 
   return (
