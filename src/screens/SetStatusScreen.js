@@ -27,24 +27,11 @@ const SetStatusScreen = () => {
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.header}>Set Pooping Status</Text>
-      <TouchableOpacity style={styles.button} onPress={toggleStatus}>
-        <Text style={styles.buttonText}>{status ? 'Stop Pooping' : 'Start Pooping'}</Text>
+      <TouchableOpacity style={globalStyles.button} onPress={toggleStatus}>
+        <Text style={globalStyles.buttonText}>{status ? 'Stop Pooping' : 'Start Pooping'}</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#6200EE',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-  },
-});
 
 export default SetStatusScreen;

@@ -32,7 +32,7 @@ const SearchScreen = () => {
       <Text style={globalStyles.header}>Search Users</Text>
       <View style={styles.searchBar}>
         <TextInput
-          style={styles.input}
+          style={globalStyles.input}
           value={username}
           onChangeText={setUsername}
           placeholder="Username"

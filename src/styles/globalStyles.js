@@ -24,10 +24,10 @@ const globalStyles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     borderRadius: 6,
-    marginBottom: 10,
+    minWidth: 150,
   },
   button: {
-    backgroundColor: '#6b52ae',
+    backgroundColor: '#6200EE',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 6,
