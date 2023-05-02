@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {
+  useEffect,
+  useContext
+} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Octicons } from '@expo/vector-icons';
@@ -12,10 +15,19 @@ import NotificationsScreen from '../screens/NotificationsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
 import ChatsScreen from '../screens/ChatsScreen';
 
+import { AuthContext } from '../context/AuthContext';
+import { UserContext } from '../context/UserContext';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const { setUser } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    setUser(user);
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -54,11 +66,6 @@ const TabNavigator = () => {
       />
     </Tab.Navigator>
   );
-};
-
-const styles = {
-  color: "black",
-  size: 1
 };
 
 export default TabNavigator;

@@ -6,6 +6,8 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 
+import { UserProvider } from '../context/UserContext';
+
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
@@ -28,9 +30,14 @@ const StackNavigator = () => {
       />
       <Stack.Screen
         name="TabNavigator"
-        component={TabNavigator}
         options={{ headerShown: false }}
-      />
+      >
+        {props => (
+          <UserProvider {...props} >
+            <TabNavigator></TabNavigator>
+          </UserProvider>
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };

@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
       }
       await AsyncStorage.setItem('user', JSON.stringify(userData));
       await AsyncStorage.setItem('jwt', userData.token);
-      console.log("userData: " + JSON.stringify(userData, null, 4));
       setUser(userData.userData);
       setIsLoggedOut(false);
       nav.navigate('TabNavigator');
