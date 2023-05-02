@@ -5,12 +5,14 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
-  getUser
-} from '../services/api';
+  getUser,
+  updateUserStatus,
+} from '../services/userService';
 
 const UserContext = createContext({
   user: null,
-  fetchUser: () => {}
+  fetchUser: () => {},
+  updateStatus: () => {}
 });
 
 const UserProvider = ({ children }) => {
@@ -20,8 +22,15 @@ const UserProvider = ({ children }) => {
     try {} catch (err) {}
   };
 
+  async function updateStatus(status, expiresAt) {
+    try {
+      const userData = await updateUserStatus(user, status, expiresAt);
+      setUser(userData);
+    } catch(e) {}
+  }
+
   return (
-    <UserContext.Provider value={{ user, setUser, fetchUser }}>
+    <UserContext.Provider value={{ user, setUser, fetchUser, updateStatus }}>
       {children}
     </UserContext.Provider>
   );

@@ -30,11 +30,11 @@ const ProfileScreen = () => {
       <Text style={globalStyles.text}>Email: {user?.email}</Text>
       <TouchableOpacity onPress={() => navigation.navigate('SetStatus')}>
         <Text style={globalStyles.text}>
-          Pooping Status: {user?.poopingStatus ? 'Pooping' : 'Not Pooping'}
+          Pooping Status: {user?.isPooping ? 'Pooping' : 'Not Pooping'}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Friends')}>
-        <Text style={globalStyles.text}>Number of Friends: {user?.friends.length}</Text>
+        <Text style={globalStyles.text}>Number of Friends: {user?.friends?.length}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={globalStyles.button} onPress={handleLogout}>
         <Text style={globalStyles.buttonText}>Logout</Text>

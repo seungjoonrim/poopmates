@@ -8,7 +8,7 @@ import {
   checkToken,
   loginUser,
   registerUser,
-} from '../services/api';
+} from '../services/authService';
 
 const AuthContext = createContext({
   user: null,
@@ -32,7 +32,9 @@ const AuthProvider = ({ children }) => {
       }
       await AsyncStorage.setItem('user', JSON.stringify(userData));
       await AsyncStorage.setItem('jwt', userData.token);
-      setUser(userData.userData);
+      const stringified = JSON.stringify(userData.userData)
+      const parsed = JSON.parse(stringified);
+      setUser(parsed);
       setIsLoggedOut(false);
       nav.navigate('TabNavigator');
     } catch (err) {}

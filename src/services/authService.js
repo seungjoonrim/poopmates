@@ -1,10 +1,14 @@
 import axios from 'axios';
 
+import {
+  BASE_URL
+} from '../utils/constants';
+
 const api = axios.create({
-  baseURL: 'http://192.168.1.169:3030/api',
+  baseURL: BASE_URL,
 });
 
-export const loginUser = async (email, password, jwt) => {
+async function loginUser(email, password, jwt) {
   try {
     const data = { email, password };
     const headers = {
@@ -14,6 +18,7 @@ export const loginUser = async (email, password, jwt) => {
     const response = await api.post('/login', data, { headers });
 
     if (response.data) {
+      console.log('Logged in successfully');
       return response.data;
     }
   } catch (error) {
@@ -22,11 +27,12 @@ export const loginUser = async (email, password, jwt) => {
   }
 };
 
-export const registerUser = async (username, email, password) => {
+async function registerUser(username, email, password) {
   try {
     const response = await api.post('/register', { username, email, password });
 
     if (response.data) {
+      console.log('Registered in successfully');
       return response.data;
     }
   } catch (error) {
@@ -36,6 +42,13 @@ export const registerUser = async (username, email, password) => {
 };
 
 // TODO: add this functionality to API
-export const requestPasswordReset = async () => {
+async function requestPasswordReset() {
   console.log("requestPasswordReset");
 };
+
+
+export {
+  loginUser,
+  registerUser,
+  requestPasswordReset
+}
