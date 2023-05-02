@@ -17,7 +17,7 @@ const SetStatusScreen = () => {
     setIsPooping(newStatus);
 
     // Calculate the new poopingStatusExpiresAt value
-    const expiresIn = newStatus ? 30 * 60 * 1000 : 0; // 30 minutes in milliseconds
+    const expiresIn = newStatus ? 5 * 60 * 1000 : 0; // 30 minutes in milliseconds
     const newExpiresAt = newStatus ? new Date(Date.now() + expiresIn) : null;
 
     try {
