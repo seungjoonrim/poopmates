@@ -5,7 +5,7 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
-  getUser,
+  fetchUser,
   updateUserStatus,
 } from '../services/userService';
 
@@ -18,19 +18,26 @@ const UserContext = createContext({
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  async function fetchUser(id) {
-    try {} catch (err) {}
+  async function initUser(id) {
+    try {
+      const userData = await fetchUser(id);
+      await AsyncStorage.setItem('user', JSON.stringify(userData));
+      const stringified = JSON.stringify(userData);
+      const parsed = JSON.parse(stringified);
+      return parsed;
+    } catch (err) {}
   };
 
-  async function updateStatus(status, expiresAt) {
+  async function updateStatus(u, status, expiresAt) {
+    const usr = u ? u : user;
     try {
-      const userData = await updateUserStatus(user, status, expiresAt);
+      const userData = await updateUserStatus(usr, status, expiresAt);
       setUser(userData);
     } catch(e) {}
   }
 
   return (
-    <UserContext.Provider value={{ user, setUser, fetchUser, updateStatus }}>
+    <UserContext.Provider value={{ user, updateStatus, setUser, initUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -9,6 +9,9 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
 import { UserContext } from '../context/UserContext';
 import globalStyles from '../styles/globalStyles';
+import {
+  getDifferenceUntilFutureTime
+} from '../utils/utils';
 
 const ProfileScreen = () => {
   const { logout } = useContext(AuthContext);
@@ -33,6 +36,13 @@ const ProfileScreen = () => {
           Pooping Status: {user?.isPooping ? 'Pooping' : 'Not Pooping'}
         </Text>
       </TouchableOpacity>
+      {
+        user?.isPooping ?
+          <Text style={globalStyles.text}>
+            Done pooping in: {user?.isPoopingExpiresAt ? getDifferenceUntilFutureTime(user.isPoopingExpiresAt, 'minutes') : ''} minutes
+          </Text> :
+          ''
+      }
       <TouchableOpacity onPress={() => navigation.navigate('Friends')}>
         <Text style={globalStyles.text}>Number of Friends: {user?.friends?.length}</Text>
       </TouchableOpacity>

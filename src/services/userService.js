@@ -8,6 +8,15 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
+async function fetchUser(id) {
+  try {
+    const response = await api.get(`/users/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error searching for users:', error);
+  }
+}
+
 async function updateUserStatus(user, status, expiresAt) {
   try {
     const payload = {
@@ -38,6 +47,7 @@ async function searchUsers(searchTerm) {
 };
 
 export {
+  fetchUser,
   searchUsers,
   updateUserStatus
 }

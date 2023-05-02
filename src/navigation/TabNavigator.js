@@ -18,14 +18,28 @@ import ChatsScreen from '../screens/ChatsScreen';
 import { AuthContext } from '../context/AuthContext';
 import { UserContext } from '../context/UserContext';
 
+import {
+  isPoopingExpired
+} from '../utils/utils';
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  const { setUser } = useContext(UserContext);
-  const { user } = useContext(AuthContext);
+  const { initUser, updateStatus, setUser } = useContext(UserContext);
+  const { userId } = useContext(AuthContext);
+
+  async function bootstrap() {
+    const user = await initUser(userId);
+    const poopingExpired = isPoopingExpired(user);
+    if (user.isPooping && poopingExpired) {
+      updateStatus(user, false, null);
+    } else {
+      setUser(user);
+    }
+  }
 
   useEffect(() => {
-    setUser(user);
+    bootstrap();
   }, []);
 
   return (

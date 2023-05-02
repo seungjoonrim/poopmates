@@ -18,7 +18,7 @@ const AuthContext = createContext({
 });
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
 
   async function login(email, password, nav) {
@@ -30,11 +30,10 @@ const AuthProvider = ({ children }) => {
         const token = await AsyncStorage.getItem('jwt');
         userData = await loginUser(null, null, token);
       }
-      await AsyncStorage.setItem('user', JSON.stringify(userData));
       await AsyncStorage.setItem('jwt', userData.token);
       const stringified = JSON.stringify(userData.userData)
       const parsed = JSON.parse(stringified);
-      setUser(parsed);
+      setUserId(parsed._id);
       setIsLoggedOut(false);
       nav.navigate('TabNavigator');
     } catch (err) {}
@@ -51,14 +50,14 @@ const AuthProvider = ({ children }) => {
     try {
       await AsyncStorage.removeItem('user');
       await AsyncStorage.removeItem('jwt');
-      setUser(null);
+      setUserId(null);
       setIsLoggedOut(true);
       nav.navigate('Login');
     } catch (e) {}
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ userId, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
