@@ -30,10 +30,11 @@ const TabNavigator = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'gray',
-      })}>
+      }}>
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
