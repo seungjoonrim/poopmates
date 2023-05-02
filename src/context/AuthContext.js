@@ -23,8 +23,13 @@ const AuthProvider = ({ children }) => {
 
   async function login(email, password, nav) {
     try {
-      const token = await AsyncStorage.getItem('jwt');
-      const userData = await loginUser(email, password, token);
+      let userData;
+      if (email && password) {
+        userData = await loginUser(email, password, null);
+      } else {
+        const token = await AsyncStorage.getItem('jwt');
+        userData = await loginUser(null, null, token);
+      }
       await AsyncStorage.setItem('user', JSON.stringify(userData));
       await AsyncStorage.setItem('jwt', userData.token);
       console.log("userData: " + JSON.stringify(userData, null, 4));
