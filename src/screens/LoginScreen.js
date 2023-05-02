@@ -13,11 +13,10 @@ import {
 } from 'react-native';
 
 import { AuthContext } from '../context/AuthContext';
-// import Button from '../components/Button';
 import globalStyles from '../styles/globalStyles';
 
 const LoginScreen = ({ navigation }) => {
-  const { checkToken, login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
