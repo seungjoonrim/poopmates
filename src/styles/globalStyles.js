@@ -6,6 +6,7 @@ const globalStyles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#f5f5f5',
   },
+  // TODO: add box styles
   header: {
     fontSize: 24,
     fontWeight: 'bold',

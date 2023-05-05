@@ -1,10 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-// TODO: do i need this component?
-const Button = ({ title, onPress, style }) => {
+const Button = ({ title, onPress, style, size }) => {
+  const width = styles[size];
+
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
+    <TouchableOpacity onPress={onPress} style={[styles.button, width, style]}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
@@ -19,6 +20,15 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     textAlign: 'center',
+  },
+  sm: {
+    width: 100
+  },
+  md: {
+    width: 200
+  },
+  lg: {
+    width: 300
   },
 });
 

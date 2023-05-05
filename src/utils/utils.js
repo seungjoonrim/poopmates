@@ -25,7 +25,17 @@ function isPoopingExpired(user) {
   return (timeLeft <= 0) ? true : false;
 }
 
+function determineStatus(user) {
+  if (!user.isPooping) {
+    return false;
+  } else {
+    const statusExpired = isPoopingExpired(user);
+    return statusExpired ? false : true;
+  }
+}
+
 export {
+  determineStatus,
   getDifferenceUntilFutureTime,
-  isPoopingExpired
+  isPoopingExpired,
 }
