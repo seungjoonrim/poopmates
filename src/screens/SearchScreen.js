@@ -6,7 +6,7 @@ import { View, StyleSheet } from 'react-native';
 
 import SearchBar from '../components/SearchBar';
 import UserList from '../components/UserList';
-import { searchUsers } from '../services/userService';
+import { getSearchUsers } from '../services/userService';
 import globalStyles from '../styles/globalStyles';
 
 const SearchScreen = () => {
@@ -14,14 +14,14 @@ const SearchScreen = () => {
   const [users, setUsers] = useState([]);
 
   async function handleSearch() {
-    const results = await searchUsers(searchTerm);
+    const results = await getSearchUsers(searchTerm);
     setUsers(results);
   };
 
   useEffect(() => {
     async function fetchSearchResults() {
       if (searchTerm.trim() !== '') {
-        const results = await searchUsers(searchTerm);
+        const results = await getSearchUsers(searchTerm);
         setUsers(results);
       } else {
         setUsers([]);

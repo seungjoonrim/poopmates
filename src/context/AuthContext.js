@@ -5,9 +5,8 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
-  checkToken,
-  loginUser,
-  registerUser,
+  postLogin,
+  postRegisterUser,
 } from '../services/authService';
 
 const AuthContext = createContext({
@@ -25,10 +24,10 @@ const AuthProvider = ({ children }) => {
     try {
       let userData;
       if (email && password) {
-        userData = await loginUser(email, password, null);
+        userData = await postLogin(email, password, null);
       } else {
         const token = await AsyncStorage.getItem('jwt');
-        userData = await loginUser(null, null, token);
+        userData = await postLogin(null, null, token);
       }
       await AsyncStorage.setItem('jwt', userData.token);
       const stringified = JSON.stringify(userData.userData)
@@ -41,7 +40,7 @@ const AuthProvider = ({ children }) => {
 
   async function register(username, email, password, nav) {
     try {
-      const userData = await registerUser(username, email, password);
+      const userData = await postRegisterUser(username, email, password);
       nav.navigate('Login');
     } catch (err) {}
   };

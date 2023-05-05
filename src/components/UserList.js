@@ -1,19 +1,26 @@
-import React from 'react';
+import React, {
+  useContext,
+} from 'react';
 import { FlatList, Text, View, StyleSheet } from 'react-native';
 
 import Button from './Button';
 import StatusIndicator from './StatusIndicator';
 import globalStyles from '../styles/globalStyles';
+import { UserContext } from '../context/UserContext';
 
-const UserListItem = ({ user }) => (
-  <View style={styles.item}>
-    <View style={styles.username}>
-      <Text style={globalStyles.text}>{user.username}</Text>
-      <StatusIndicator user={user} />
+const UserListItem = ({ user }) => {
+  const { user: mainUser, requestFriend } = useContext(UserContext);
+
+  return (
+    <View style={styles.item}>
+      <View style={styles.username}>
+        <Text style={globalStyles.text}>{user.username}</Text>
+        <StatusIndicator user={user} />
+      </View>
+      <Button title="Add mate" size="sm" onPress={() => requestFriend(mainUser._id, user._id)}/>
     </View>
-    <Button title="Add mate" size="sm" />
-  </View>
-);
+  )
+};
 
 const UserList = ({ users }) => (
   <FlatList

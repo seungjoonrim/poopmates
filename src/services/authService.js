@@ -8,7 +8,7 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
-async function loginUser(email, password, jwt) {
+async function postLogin(email, password, jwt) {
   try {
     const data = { email, password };
     const headers = {
@@ -17,26 +17,26 @@ async function loginUser(email, password, jwt) {
     }
     const response = await api.post('/login', data, { headers });
 
-    if (response.data) {
+    if (response.status == 200) {
       console.log('Logged in successfully');
       return response.data;
     }
   } catch (error) {
-    console.error('Error in loginUser API call:', error);
+    console.error('Error in postLogin API call:', error);
     throw error;
   }
 };
 
-async function registerUser(username, email, password) {
+async function postRegisterUser(username, email, password) {
   try {
     const response = await api.post('/register', { username, email, password });
 
-    if (response.data) {
+    if (response.status == 200) {
       console.log('Registered in successfully');
       return response.data;
     }
   } catch (error) {
-    console.error('Error in registerUser API call:', error);
+    console.error('Error in postRegisterUser API call:', error);
     throw error;
   }
 };
@@ -48,7 +48,6 @@ async function requestPasswordReset() {
 
 
 export {
-  loginUser,
-  registerUser,
-  requestPasswordReset
+  postLogin,
+  postRegisterUser,
 }

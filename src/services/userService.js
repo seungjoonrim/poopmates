@@ -8,7 +8,7 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
-async function fetchUser(id) {
+async function getUser(id) {
   try {
     const response = await api.get(`/users/${id}`);
     return response.data;
@@ -17,7 +17,7 @@ async function fetchUser(id) {
   }
 }
 
-async function updateUserStatus(user, status, expiresAt) {
+async function patchUserStatus(user, status, expiresAt) {
   try {
     const payload = {
       isPooping: status,
@@ -28,15 +28,13 @@ async function updateUserStatus(user, status, expiresAt) {
     if (response.status === 200) {
       console.log('Status updated successfully');
       return response.data;
-    } else {
-      console.error('Error updating status');
     }
   } catch (error) {
-    console.error('API request failed:', error);
+    console.error('Error updating status');
   }
 }
 
-async function searchUsers(searchTerm) {
+async function getSearchUsers(searchTerm) {
   try {
     const response = await api.get('/search', { params: { q: searchTerm } });
     return response.data;
@@ -46,8 +44,55 @@ async function searchUsers(searchTerm) {
   }
 };
 
+async function postRequestFriend(userId, friendId) {
+  console.log(userId);
+  console.log(friendId);
+  try {
+    const response = await api.post(`/send-friend-request/${userId}/${friendId}`);
+
+    if (response.status == 200) {
+      console.log('Friend requested successfully');
+      return response.data;
+    }
+
+  } catch (error) {
+    console.error('Error sending friend request:', error.response.data.message);
+  }
+}
+
+async function postAcceptFriend(userId, friendId) {
+  try {
+    const response = await api.post(`/accept-friend-request/${userId}/${friendId}`);
+
+    if (response.status == 200) {
+      console.log('Friend accepted successfully');
+      return response;
+    }
+
+  } catch (error) {
+    console.error('Error accepting friend request:', error.response.data.message);
+  }
+}
+
+async function postRejectFriend(userId, friendId) {
+  try {
+    const response = await api.post(`/reject-friend-request/${userId}/${friendId}`);
+
+    if (response.status == 200) {
+      console.log('Friend request rejected successfully');
+      return response;
+    }
+
+  } catch (error) {
+    console.error('Error rejecting friend request:', error.response.data.message);
+  }
+}
+
 export {
-  fetchUser,
-  searchUsers,
-  updateUserStatus
+  getUser,
+  getSearchUsers,
+  patchUserStatus,
+  postAcceptFriend,
+  postRejectFriend,
+  postRequestFriend,
 }
