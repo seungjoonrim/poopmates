@@ -1,13 +1,23 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 
 const Button = ({ title, onPress, style, size }) => {
   const width = styles[size];
 
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, width, style]}>
-      <Text style={styles.buttonText}>{title}</Text>
-    </TouchableOpacity>
+    <Pressable style={({pressed}) => ({
+      backgroundColor: 'orange',
+    })}>
+      <TouchableOpacity onPress={onPress}
+                        style={[styles.button, width, style]}>
+        <Text style={styles.buttonText}>{title}</Text>
+      </TouchableOpacity>
+    </Pressable>
   );
 };
 
