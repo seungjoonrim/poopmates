@@ -1,80 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  StyleSheet,
+  View
 } from 'react-native';
 
+import { UserContext } from '../context/UserContext';
+import NotificationList from '../components/NotificationList';
 import globalStyles from '../styles/globalStyles';
 
 const NotificationsScreen = () => {
-  const [notifications, setNotifications] = useState([]);
+  // const [notifications, setNotifications] = useState([]);
+  const { user } = useContext(UserContext);
 
-  const getNotifications = async () => {
-    // Implement fetch notifications logic here, e.g., call API to get notifications
-  };
-
-  const acceptFriendRequest = async (notificationId) => {
-    // Implement accept friend request logic here, e.g., call API to accept a friend request
-  };
+  // const getNotifications = async () => {
+  //   // Implement fetch notifications logic here, e.g., call API to get notifications
+  // };
 
   useEffect(() => {
-    const fetchNotifications = async () => {
-      const fetchedNotifications = await getNotifications();
-      setNotifications(fetchedNotifications);
-    };
-
-    fetchNotifications();
-  }, []);
+  }, [user]);
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.header}>Notifications</Text>
-      <FlatList
-        data={notifications}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
-          <View style={styles.notificationItem}>
-            <Text style={styles.notificationText}>{item.text}</Text>
-            {item.type === 'friendRequest' && (
-              <TouchableOpacity
-                style={styles.acceptButton}
-                onPress={() => acceptFriendRequest(item._id)}
-              >
-                <Text style={styles.acceptButtonText}>Accept</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
-      />
+      <NotificationList notifications={user.friendRequests} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  notificationItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  notificationText: {
-    fontSize: 18,
-  },
-  acceptButton: {
-    backgroundColor: '#6200EE',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 5,
-  },
-  acceptButtonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-});
+// TODO: make a 'Notification' entity in the db and refactor this
+// For now, the list of notifications is just the id of friend requests
 
 export default NotificationsScreen;

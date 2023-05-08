@@ -50,17 +50,29 @@ const UserProvider = ({ children }) => {
   }
 
   async function acceptFriend(userId, friendId) {
+    try {
+      const resp = await postAcceptFriend(userId, friendId);
+      const friends = [friendId, ...user.friends];
+      console.log("friends: " + friends);
+      const friendRequests = user.friendRequests.filter(fr => fr !== friendId);
+      console.log("friendRequests: " + friendRequests);
+      const userUpdate = user;
+      userUpdate.friends = friends;
+      userUpdate.friendRequests = friendRequests;
+      setUser(userUpdate);
+    } catch (err) {}
   }
 
   async function rejectFriend(userId, friendId) {
   }
 
   const providerValue = {
-    user,
-    updateStatus,
-    setUser,
+    acceptFriend,
     initUser,
     requestFriend,
+    setUser,
+    updateStatus,
+    user,
   }
 
   return (
