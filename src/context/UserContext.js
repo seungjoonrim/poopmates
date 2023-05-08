@@ -53,9 +53,7 @@ const UserProvider = ({ children }) => {
     try {
       const resp = await postAcceptFriend(userId, friendId);
       const friends = [friendId, ...user.friends];
-      console.log("friends: " + friends);
       const friendRequests = user.friendRequests.filter(fr => fr !== friendId);
-      console.log("friendRequests: " + friendRequests);
       const userUpdate = user;
       userUpdate.friends = friends;
       userUpdate.friendRequests = friendRequests;

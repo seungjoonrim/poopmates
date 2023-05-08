@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { AuthContext } from '../context/AuthContext';
 import { UserContext } from '../context/UserContext';
+import Button from '../components/Button';
 import globalStyles from '../styles/globalStyles';
 import {
   getDifferenceUntilFutureTime
@@ -46,9 +47,7 @@ const ProfileScreen = () => {
       <TouchableOpacity onPress={() => navigation.navigate('Friends')}>
         <Text style={globalStyles.text}>Number of Friends: {user?.friends?.length}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={globalStyles.button} onPress={handleLogout}>
-        <Text style={globalStyles.buttonText}>Logout</Text>
-      </TouchableOpacity>
+      <Button title="Logout" size="lg" bold={true} onPress={handleLogout}/>
     </View>
   );
 };

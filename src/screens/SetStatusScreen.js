@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+import Button from '../components/Button';
 import { UserContext } from '../context/UserContext';
 import globalStyles from '../styles/globalStyles';
 
@@ -28,9 +29,10 @@ const SetStatusScreen = () => {
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.header}>Set Pooping Status</Text>
-      <TouchableOpacity style={globalStyles.button} onPress={toggleStatus}>
-        <Text style={globalStyles.buttonText}>{user.isPooping ? 'Stop Pooping' : 'Start Pooping'}</Text>
-      </TouchableOpacity>
+      <Button title={user.isPooping ? 'Stop Pooping' : 'Start Pooping'}
+              size="lg"
+              bold={true}
+              onPress={toggleStatus}/>
     </View>
   );
 };
