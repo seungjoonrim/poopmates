@@ -9,7 +9,7 @@ import globalStyles from '../styles/globalStyles';
 import { UserContext } from '../context/UserContext';
 
 const NotificationListItem = ({ notification }) => {
-  const { user, acceptFriend } = useContext(UserContext);
+  const { user, acceptFriend, rejectFriend } = useContext(UserContext);
 
   return (
     <View style={styles.item}>
@@ -17,6 +17,7 @@ const NotificationListItem = ({ notification }) => {
         <Text style={globalStyles.text}>{notification.slice(0,3)}</Text>
       </View>
       <Button title="Accept mate" size="sm" onPress={() => acceptFriend(user._id, notification)}/>
+      <Button title="Reject mate" size="sm" onPress={() => rejectFriend(user._id, notification)}/>
     </View>
   )
 };

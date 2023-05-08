@@ -62,11 +62,19 @@ const UserProvider = ({ children }) => {
   }
 
   async function rejectFriend(userId, friendId) {
+    try {
+      const resp = await postRejectFriend(userId, friendId);
+      const friendRequests = user.friendRequests.filter(fr => fr !== friendId);
+      const userUpdate = user;
+      userUpdate.friendRequests = friendRequests;
+      setUser(userUpdate);
+    } catch (err) {}
   }
 
   const providerValue = {
     acceptFriend,
     initUser,
+    rejectFriend,
     requestFriend,
     setUser,
     updateStatus,

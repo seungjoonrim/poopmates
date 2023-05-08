@@ -27,6 +27,7 @@ const globalStyles = StyleSheet.create({
     borderRadius: 6,
     minWidth: 150,
   },
+  // Use Button component smh...
   button: {
     backgroundColor: '#6200EE',
     paddingHorizontal: 20,
