@@ -14,7 +14,6 @@ import {
 
 const UserContext = createContext({
   user: null,
-  getUser: () => {},
   updateStatus: () => {},
   requestFriend: () => {},
   acceptFriend: () => {},

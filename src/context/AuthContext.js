@@ -10,7 +10,7 @@ import {
 } from '../services/authService';
 
 const AuthContext = createContext({
-  user: null,
+  userId: null,
   login: () => {},
   register: () => {},
   logout: () => {},
