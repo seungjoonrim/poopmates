@@ -8,27 +8,28 @@ import StatusIndicator from './StatusIndicator';
 import globalStyles from '../styles/globalStyles';
 import { UserContext } from '../context/UserContext';
 
-const FriendListItem = ({ user }) => {
+const FriendListItem = ({ friend }) => {
   // const { user: mainUser, requestFriend } = useContext(UserContext);
 
   return (
     <View style={styles.item}>
       <View style={styles.username}>
-        <Text style={globalStyles.text}>{user.username}</Text>
+        <Text style={globalStyles.text}>{friend.username}</Text>
         <StatusIndicator user={friend} />
       </View>
-      // <Button title="Add mate" size="sm" onPress={() => requestFriend(mainUser._id, user._id)}/>
     </View>
   )
 };
 
-const FriendList = ({ friends }) => (
-  <FlatList
-    data={friends}
-    renderItem={({ item }) => <FriendListItem friend={item} />}
-    keyExtractor={(item) => item._id}
-  />
-);
+const FriendList = ({ friends }) => {
+  return (
+    <FlatList
+      data={friends}
+      renderItem={({ item }) => <FriendListItem friend={item} />}
+      keyExtractor={(item) => item._id}
+    />
+  )
+};
 
 const styles = StyleSheet.create({
   item: {

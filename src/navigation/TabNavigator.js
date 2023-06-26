@@ -30,6 +30,7 @@ const TabNavigator = () => {
 
   async function bootstrap() {
     const user = await initUser(userId);
+    console.log("USER: " + JSON.stringify(user));
     const poopingExpired = isPoopingExpired(user);
     if (user.isPooping && poopingExpired) {
       updateStatus(user, false, null);

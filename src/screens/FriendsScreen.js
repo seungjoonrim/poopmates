@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import {
   View,
   Text,
@@ -7,13 +11,27 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import FriendList from '../components/FriendList';
 import globalStyles from '../styles/globalStyles';
+
+import { UserContext } from '../context/UserContext';
+
+import {
+  getUser,
+} from '../services/userService';
 
 const FriendsScreen = () => {
   const [friends, setFriends] = useState([]);
+  const { user } = useContext(UserContext);
 
   const getFriends = async () => {
-    // Implement fetch friends logic here, e.g., call API to get friends
+    const promises = [];
+    for (const i in user.friends) {
+      promises.push(getUser(user.friends[i]));
+    }
+
+    const resp = await Promise.all(promises);
+    return resp;
   };
 
   const requestChat = async (friendId) => {
@@ -32,24 +50,7 @@ const FriendsScreen = () => {
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.header}>Friends</Text>
-      <FlatList
-        data={friends}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
-          <View style={styles.friendItem}>
-            <Text style={styles.friendName}>{item.name}</Text>
-            <Text style={styles.friendStatus}>{item.status}</Text>
-            {item.status === 'pooping' && (
-              <TouchableOpacity
-                style={styles.chatButton}
-                onPress={() => requestChat(item._id)}
-              >
-                <Text style={styles.chatButtonText}>Chat</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
-      />
+      <FriendList friends={friends} />
     </View>
   );
 };
