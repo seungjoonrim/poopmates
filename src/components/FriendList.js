@@ -9,7 +9,7 @@ import globalStyles from '../styles/globalStyles';
 import { UserContext } from '../context/UserContext';
 
 const FriendListItem = ({ friend }) => {
-  // const { user: mainUser, requestFriend } = useContext(UserContext);
+  const { user, requestFriend } = useContext(UserContext);
 
   return (
     <View style={styles.item}>
@@ -17,6 +17,7 @@ const FriendListItem = ({ friend }) => {
         <Text style={globalStyles.text}>{friend.username}</Text>
         <StatusIndicator user={friend} />
       </View>
+      <Button title="Msg" size="sm" onPress={() => startChat(user._id, friend._id)}/>
     </View>
   )
 };
